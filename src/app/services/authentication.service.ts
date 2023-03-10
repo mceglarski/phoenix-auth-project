@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import {CredentialsRequest} from "../models/credentials/credentials.request";
-import {CredentialsResponseData} from "../models/credentials/credential.response";
-import {ResponseModel} from "../models/response.response";
+import { CredentialsRequest } from '../models/credentials/credentials.request';
+import { CredentialsResponseData } from '../models/credentials/credential.response';
+import { ResponseModel } from '../models/response.response';
 
 @Injectable({
   providedIn: 'root',

@@ -19,7 +19,7 @@ import {ValidationErrorPipe} from "../../../pipes/validation-error.pipe";
   ],
   declarations: [LoginComponent, ValidationErrorPipe],
   providers: [MatSnackBar, Overlay],
-  exports: [LoginComponent]
+  exports: [LoginComponent, ValidationErrorPipe]
 })
 export class LoginComponentModule {
 }

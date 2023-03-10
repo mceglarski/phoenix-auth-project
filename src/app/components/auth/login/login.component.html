@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div
       class="bg-holder bg-auth-card-overlay"
-      style="background-image: url(../../../assets/img/bg/37.png)"
+      style="background-image: url(../../../../assets/img/bg/37.png)"
     ></div>
     <!--/.bg-holder-->
 
@@ -16,7 +16,9 @@
               >
                 <div
                   class="bg-holder"
-                  style="background-image: url(../../../assets/img/bg/38.png)"
+                  style="
+                    background-image: url(../../../../assets/img/bg/38.png);
+                  "
                 ></div>
                 <!--/.bg-holder-->
 
@@ -155,7 +157,7 @@
                       [disabled]="loginForm.invalid"
                       type="submit"
                       class="w-100 mb-3"
-                      [ngClass]="{ 'btn btn-primary': loginForm.valid }"
+                      [ngClass]="{ 'btn btn-primary mb-3': loginForm.valid }"
                     >
                       Sign In
                     </button>
