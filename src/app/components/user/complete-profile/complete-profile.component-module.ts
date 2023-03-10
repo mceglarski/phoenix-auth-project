@@ -1,31 +1,25 @@
 import { NgModule } from '@angular/core';
-import { RegisterComponent } from './register.component';
+import { CompleteProfileComponent } from './complete-profile.component';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Overlay } from '@angular/cdk/overlay';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { LoginComponentModule } from '../login/login.component-module';
 import { ValidationErrorModule } from '../../../pipes/validation-error.module';
 
 @NgModule({
   imports: [
     CommonModule,
-    MatCardModule,
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatCheckboxModule,
-    LoginComponentModule,
     ValidationErrorModule,
   ],
-  declarations: [RegisterComponent],
+  declarations: [CompleteProfileComponent],
   providers: [MatSnackBar, Overlay],
-  exports: [RegisterComponent],
+  exports: [CompleteProfileComponent],
 })
-export class RegisterComponentModule {}
+export class CompleteProfileComponentModule {}

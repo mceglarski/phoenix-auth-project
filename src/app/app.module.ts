@@ -3,9 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { EmailVerifiedGuard } from './guards/email-verified/email-verified.guard';
+import { AuthorizationInterceptor } from './interceptors/authorization.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -15,7 +15,14 @@ import { EmailVerifiedGuard } from './guards/email-verified/email-verified.guard
     AppRoutingModule,
     HttpClientModule,
   ],
-  providers: [{ provide: Storage, useValue: localStorage }, EmailVerifiedGuard],
+  providers: [
+    { provide: Storage, useValue: localStorage },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthorizationInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

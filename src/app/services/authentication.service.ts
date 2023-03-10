@@ -35,25 +35,6 @@ export class AuthenticationService {
       );
   }
 
-  public loginAdmin(
-    credentials: CredentialsRequest
-  ): Observable<CredentialsResponseData> {
-    return this._httpClient
-      .post<ResponseModel<CredentialsResponseData>>(
-        `${environment.apiUrl}/auth/login-admin`,
-        {
-          data: credentials,
-        }
-      )
-      .pipe(
-        map((data) => data.data),
-        tap((data) => {
-          this._loggedInSubject.next(true);
-          this.saveUserStorage(data);
-        })
-      );
-  }
-
   public logout(): void {
     this._loggedInSubject.next(false);
     this._storage.clear();

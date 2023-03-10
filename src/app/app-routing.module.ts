@@ -7,11 +7,12 @@ import { RegisterComponent } from './components/auth/register/register.component
 import { RegisterComponentModule } from './components/auth/register/register.component-module';
 import { VerifyComponent } from './components/user/verify/verify.component';
 import { VerifyComponentModule } from './components/user/verify/verify.component-module';
-import { BioComponent } from './components/user/bio/bio.component';
-import { BioComponentModule } from './components/user/bio/bio.component-module';
 import { EmailVerifiedGuard } from './guards/email-verified/email-verified.guard';
 import { LeadsMainComponent } from './components/leads/leads-main/leads-main.component';
 import { LeadsMainComponentModule } from './components/leads/leads-main/leads-main.component-module';
+import { CompleteProfileComponent } from './components/user/complete-profile/complete-profile.component';
+import { CompleteProfileComponentModule } from './components/user/complete-profile/complete-profile.component-module';
+import { ProfileCompletedGuard } from './guards/profile-completed/profile-completed.guard';
 
 @NgModule({
   imports: [
@@ -26,14 +27,14 @@ import { LeadsMainComponentModule } from './components/leads/leads-main/leads-ma
         component: VerifyComponent,
       },
       {
-        path: ROUTES_DEF.BIO,
-        component: BioComponent,
+        path: ROUTES_DEF.COMPLETE_PROFILE,
+        component: CompleteProfileComponent,
         canActivate: [EmailVerifiedGuard],
       },
       {
         path: ROUTES_DEF.LEADS,
         component: LeadsMainComponent,
-        canActivate: [EmailVerifiedGuard],
+        canActivate: [EmailVerifiedGuard, ProfileCompletedGuard],
       },
       {
         path: ROUTES_DEF.AUTH,
@@ -57,8 +58,8 @@ import { LeadsMainComponentModule } from './components/leads/leads-main/leads-ma
     LoginComponentModule,
     RegisterComponentModule,
     VerifyComponentModule,
-    BioComponentModule,
     LeadsMainComponentModule,
+    CompleteProfileComponentModule,
   ],
   exports: [RouterModule],
 })

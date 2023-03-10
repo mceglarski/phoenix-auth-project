@@ -10,7 +10,9 @@ import { ROUTES_DEF } from '../../congifuration/routes-definition';
 import { UserService } from '../../services/user.service';
 import { Observable, of, switchMap } from 'rxjs';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class EmailVerifiedGuard implements CanActivate {
   constructor(private _userService: UserService, private _router: Router) {}
 

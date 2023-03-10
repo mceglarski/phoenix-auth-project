@@ -11,6 +11,7 @@ enum ValidationErrorCodes {
   SMALL_CHARACTER = 'smallCharacter',
   PASSWORD_MATCH = 'passwordMatch',
   REQUIRED_TRUE = 'requiredTrue',
+  BIO_LENGTH = 'bioLength',
 }
 
 @Pipe({ name: 'displayValidationError' })
@@ -43,6 +44,11 @@ export class ValidationErrorPipe implements PipeTransform {
     }
     if (!value || value[ValidationErrorCodes.REQUIRED_TRUE]) {
       validationMessages.push('you need to accept the terms');
+    }
+    if (!value || value[ValidationErrorCodes.BIO_LENGTH]) {
+      validationMessages.push(
+        'your bio needs to have at least 10 words and 2 sentences'
+      );
     }
     return validationMessages.toString();
   }

@@ -8,7 +8,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { RegisterService } from '../../../services/register.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { RegistrationValidators } from '../validators/registration-validators';
+import { RegistrationValidators } from '../auth-validators/auth-validators';
 import { CredentialsRequest } from '../../../models/credentials/credentials.request';
 import { take } from 'rxjs';
 import { ROUTES_DEF } from '../../../congifuration/routes-definition';
