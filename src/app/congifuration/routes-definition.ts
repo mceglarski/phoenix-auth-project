@@ -2,5 +2,7 @@ export enum ROUTES_DEF {
   AUTH = 'auth',
   REGISTER = 'register',
   LOGIN = 'login',
-  LEADS = 'leads'
+  LEADS = 'leads',
+  VERIFY = 'verify',
+  BIO = 'bio',
 }

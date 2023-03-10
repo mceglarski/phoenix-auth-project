@@ -54,4 +54,8 @@ export class LoginComponent {
         },
       });
   }
+
+  public redirectToRegister(): void {
+    this._router.navigateByUrl(`${ROUTES_DEF.AUTH}/${ROUTES_DEF.REGISTER}`);
+  }
 }

@@ -5,6 +5,13 @@ import { LoginComponent } from './components/auth/login/login.component';
 import { LoginComponentModule } from './components/auth/login/login.component-module';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { RegisterComponentModule } from './components/auth/register/register.component-module';
+import { VerifyComponent } from './components/user/verify/verify.component';
+import { VerifyComponentModule } from './components/user/verify/verify.component-module';
+import { BioComponent } from './components/user/bio/bio.component';
+import { BioComponentModule } from './components/user/bio/bio.component-module';
+import { EmailVerifiedGuard } from './guards/email-verified/email-verified.guard';
+import { LeadsMainComponent } from './components/leads/leads-main/leads-main.component';
+import { LeadsMainComponentModule } from './components/leads/leads-main/leads-main.component-module';
 
 @NgModule({
   imports: [
@@ -13,6 +20,20 @@ import { RegisterComponentModule } from './components/auth/register/register.com
         path: '',
         redirectTo: ROUTES_DEF.AUTH,
         pathMatch: 'full',
+      },
+      {
+        path: ROUTES_DEF.VERIFY,
+        component: VerifyComponent,
+      },
+      {
+        path: ROUTES_DEF.BIO,
+        component: BioComponent,
+        canActivate: [EmailVerifiedGuard],
+      },
+      {
+        path: ROUTES_DEF.LEADS,
+        component: LeadsMainComponent,
+        canActivate: [EmailVerifiedGuard],
       },
       {
         path: ROUTES_DEF.AUTH,
@@ -35,6 +56,9 @@ import { RegisterComponentModule } from './components/auth/register/register.com
     ]),
     LoginComponentModule,
     RegisterComponentModule,
+    VerifyComponentModule,
+    BioComponentModule,
+    LeadsMainComponentModule,
   ],
   exports: [RouterModule],
 })

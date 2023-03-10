@@ -65,7 +65,7 @@ export class RegisterComponent {
       .pipe(take(1))
       .subscribe({
         next: () => {
-          this._router.navigateByUrl(ROUTES_DEF.LOGIN);
+          this.redirectToLogin();
         },
         error: (e) => {
           this.formBackendErrorMessage = e.error.message;
@@ -73,5 +73,9 @@ export class RegisterComponent {
           this._cdr.detectChanges();
         },
       });
+  }
+
+  public redirectToLogin(): void {
+    this._router.navigateByUrl(`${ROUTES_DEF.AUTH}/${ROUTES_DEF.LOGIN}`);
   }
 }

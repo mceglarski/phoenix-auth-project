@@ -59,21 +59,6 @@ export class AuthenticationService {
     this._storage.clear();
   }
 
-  // public isUserVerified(): boolean {
-  //   if (this._storage.getItem('accessToken')) {
-  //     try {
-  //       const token: any = jwt_decode(this._storage.getItem('accessToken')!);
-  //       if (token.email_verified) {
-  //         return token.email_verified;
-  //       }
-  //       return false;
-  //     } catch (Error) {
-  //       return false;
-  //     }
-  //   }
-  //   return false;
-  // }
-
   private isUserLogged(): boolean {
     return this._storage.hasOwnProperty('accessToken') ?? false;
   }
