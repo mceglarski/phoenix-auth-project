@@ -6,4 +6,5 @@ export enum ROUTES_DEF {
   LEADS = 'leads',
   VERIFY = 'verify',
   COMPLETE_PROFILE = 'complete-profile',
+  LOGGED_OUT = 'logged-out'
 }

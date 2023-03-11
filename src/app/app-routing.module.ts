@@ -13,6 +13,8 @@ import { LeadsMainComponentModule } from './components/leads/leads-main/leads-ma
 import { CompleteProfileComponent } from './components/user/complete-profile/complete-profile.component';
 import { CompleteProfileComponentModule } from './components/user/complete-profile/complete-profile.component-module';
 import { ProfileCompletedGuard } from './guards/profile-completed/profile-completed.guard';
+import { LoggedOutComponent } from './components/user/logged-out/logged-out.component';
+import { LoggedOutComponentModule } from './components/user/logged-out/logged-out.component-module';
 
 @NgModule({
   imports: [
@@ -25,6 +27,10 @@ import { ProfileCompletedGuard } from './guards/profile-completed/profile-comple
       {
         path: ROUTES_DEF.VERIFY,
         component: VerifyComponent,
+      },
+      {
+        path: ROUTES_DEF.LOGGED_OUT,
+        component: LoggedOutComponent,
       },
       {
         path: ROUTES_DEF.COMPLETE_PROFILE,
@@ -60,6 +66,7 @@ import { ProfileCompletedGuard } from './guards/profile-completed/profile-comple
     VerifyComponentModule,
     LeadsMainComponentModule,
     CompleteProfileComponentModule,
+    LoggedOutComponentModule,
   ],
   exports: [RouterModule],
 })
