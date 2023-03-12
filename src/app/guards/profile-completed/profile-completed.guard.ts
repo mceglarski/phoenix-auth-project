@@ -9,6 +9,7 @@ import {
 import { catchError, Observable, of, switchMap } from 'rxjs';
 import { UserService } from '../../services/user.service';
 import { ROUTES_DEF } from '../../congifuration/routes-definition';
+import {HTTP_ERROR_CODES} from "../../congifuration/http-error-codes";
 
 @Injectable({
   providedIn: 'root',
@@ -25,7 +26,7 @@ export class ProfileCompletedGuard implements CanActivate {
         return of(true);
       }),
       catchError((e) => {
-        if (e.status === 404 || e.status === 403) {
+        if (e.status === HTTP_ERROR_CODES.NOT_FOUND) {
           return of(this._router.parseUrl(ROUTES_DEF.COMPLETE_PROFILE));
         }
         return of(this._router.parseUrl(ROUTES_DEF.MAIN_PAGE));

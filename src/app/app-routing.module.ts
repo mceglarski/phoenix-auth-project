@@ -17,6 +17,9 @@ import { LoggedOutComponent } from './components/user/logged-out/logged-out.comp
 import { LoggedOutComponentModule } from './components/user/logged-out/logged-out.component-module';
 import { AlreadyLoggedGuard } from './guards/already-logged/already-logged.guard';
 import { AuthGuard } from './guards/auth/auth.guard';
+import { CreateLeadComponent } from './components/leads/create-lead/create-lead.component';
+import { CreateLeadComponentModule } from './components/leads/create-lead/create-lead.component-module';
+import { AdminRoleGuard } from './guards/admin-role/admin-role.guard';
 
 @NgModule({
   imports: [
@@ -46,6 +49,16 @@ import { AuthGuard } from './guards/auth/auth.guard';
         canActivate: [AuthGuard, EmailVerifiedGuard, ProfileCompletedGuard],
       },
       {
+        path: ROUTES_DEF.CREATE_LEAD,
+        component: CreateLeadComponent,
+        canActivate: [
+          AuthGuard,
+          AdminRoleGuard,
+          EmailVerifiedGuard,
+          ProfileCompletedGuard,
+        ],
+      },
+      {
         path: ROUTES_DEF.AUTH,
         canActivate: [AlreadyLoggedGuard],
         children: [
@@ -69,6 +82,7 @@ import { AuthGuard } from './guards/auth/auth.guard';
     RegisterComponentModule,
     VerifyComponentModule,
     LeadsMainComponentModule,
+    CreateLeadComponentModule,
     CompleteProfileComponentModule,
     LoggedOutComponentModule,
   ],

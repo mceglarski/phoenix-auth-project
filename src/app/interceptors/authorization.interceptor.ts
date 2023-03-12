@@ -20,10 +20,11 @@ export class AuthorizationInterceptor implements HttpInterceptor {
 
   private addAuthToken(request: HttpRequest<any>) {
     const accessList = [
-      '/auth/me',
-      '/auth/complete-profile',
+      'auth/me',
+      'auth/complete-profile',
       'auth/my-bio',
       'auth/add-bio',
+      'leads'
     ];
     const token = this._storage.getItem('accessToken');
 

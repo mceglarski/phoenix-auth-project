@@ -1,12 +1,19 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map, Observable, of, shareReplay, tap } from 'rxjs';
+import { Observable, of, shareReplay, tap } from 'rxjs';
 import { USER_ROLES } from '../congifuration/user-roles';
 import { environment } from '../../environments/environment';
-import { UserResponse } from '../models/user/user.response';
 import { ResponseModel } from '../models/response.response';
 import { CompleteProfileResponse } from '../models/user/complete-profile.response';
 import { CompleteProfileRequest } from '../models/user/complete-profile.request';
+import {
+  UserRefreshResponse,
+  UserRefreshTokenResponse,
+} from '../models/user/user-refresh.response';
+import {
+  UserRefreshRequest,
+  UserRefreshTokenRequest,
+} from '../models/user/user-refresh.request';
 
 @Injectable({
   providedIn: 'root',
@@ -30,21 +37,25 @@ export class UserService {
     });
   }
 
-  public getMeInformation(): Observable<UserResponse> {
+  public refreshToken(): Observable<
+    UserRefreshResponse<UserRefreshTokenResponse>
+  > {
+    const refreshRequest: UserRefreshRequest<UserRefreshTokenRequest> = {
+      data: {
+        refreshToken: this._storage.getItem('refreshToken')!,
+      },
+    };
     return this._httpClient
-      .get<UserResponse>(`${environment.apiUrl}/auth/me`)
-      .pipe(shareReplay(1));
+      .post<UserRefreshResponse<UserRefreshTokenResponse>>(
+        `${environment.apiUrl}/auth/refresh`,
+        refreshRequest
+      )
+      .pipe(
+        tap((data) => {
+          this._storage.setItem('refreshToken', data.data.refreshToken);
+        })
+      );
   }
-
-  // public getProfileCompleted(): Observable<boolean> {
-  //   if (
-  //     this._storage.getItem('firstName') &&
-  //     this._storage.getItem('lastName')
-  //   ) {
-  //     return of(true);
-  //   }
-  //   return of(false);
-  // }
 
   public getUserRole(): Observable<string> {
     if (this._storage.getItem('accessToken')) {
@@ -72,9 +83,4 @@ export class UserService {
     }
     return of(false);
   }
-
-  // private saveProfileToStorage(profile: CompleteProfileRequest): void {
-  //   this._storage.setItem('firstName', profile.firstName);
-  //   this._storage.setItem('lastName', profile.lastName);
-  // }
 }

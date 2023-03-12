@@ -1,6 +1,6 @@
-import { LeadsHiringModel } from './leads-hiring.model';
-import { LeadsCompanySizeModel } from './leads-company-size.model';
-import { LeadsActivitiesResponse } from './leads-activities.response';
+import { LeadsHiringModel } from '../shared/leads-hiring.model';
+import { LeadsCompanySizeModel } from '../shared/leads-company-size.model';
+import { LeadsActivitiesResponse } from '../resposne/leads-activities.response';
 
 export interface LeadsQueryModel {
   readonly name: string;

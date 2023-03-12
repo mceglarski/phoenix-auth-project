@@ -1,5 +1,5 @@
-import {LeadsHiringModel} from "./leads-hiring.model";
-import {LeadsCompanySizeModel} from "./leads-company-size.model";
+import {LeadsHiringModel} from "../shared/leads-hiring.model";
+import {LeadsCompanySizeModel} from "../shared/leads-company-size.model";
 
 export interface LeadsResponse {
   readonly name: string;

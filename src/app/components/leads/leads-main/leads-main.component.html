@@ -10,10 +10,16 @@
         data-list='{"valueNames":["name","email","phone","contact","company","date"],"page":10,"pagination":true}'
       >
         <div class="row g-3 justify-content-between mb-4">
-          <div class="col-auto">
-            <div class="d-md-flex justify-content-between">
+          <div *ngIf="userRole$ | async as userRole" class="col-auto">
+            <div
+              *ngIf="userRole === userRoles.ADMIN"
+              class="d-md-flex justify-content-between"
+            >
               <div>
-                <button class="btn btn-primary me-4">
+                <button
+                  (click)="navigateToCreateLead()"
+                  class="btn btn-primary me-4"
+                >
                   <span class="fas fa-plus me-2"></span>Create Lead
                 </button>
               </div>
@@ -286,6 +292,6 @@
         </div>
       </div>
     </div>
-    <app-footer></app-footer>
   </div>
+  <app-footer></app-footer>
 </div>

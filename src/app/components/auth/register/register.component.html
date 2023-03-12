@@ -61,7 +61,7 @@
                 <div class="auth-form-box">
                   <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
                     <div class="mb-3 text-start">
-                      <label class="form-label" for="name">Name</label>
+                      <label class="form-label">Name</label>
                       <input
                         matInput
                         formControlName="name"
@@ -85,7 +85,7 @@
                       </mat-error>
                     </div>
                     <div class="mb-3 text-start">
-                      <label class="form-label" for="email"
+                      <label class="form-label"
                         >Email address</label
                       >
                       <input
@@ -112,7 +112,7 @@
                     </div>
                     <div class="row g-3 mb-3">
                       <div class="col-xl-6">
-                        <label class="form-label" for="password"
+                        <label class="form-label"
                           >Password</label
                         >
                         <input
@@ -138,7 +138,7 @@
                         </mat-error>
                       </div>
                       <div class="col-xl-6">
-                        <label class="form-label" for="confirmPassword"
+                        <label class="form-label"
                           >Confirm Password</label
                         >
                         <input
@@ -180,7 +180,6 @@
                       />
                       <label
                         class="form-label fs--1 text-none"
-                        for="termsService"
                         >I accept the <a href="/">terms </a>and
                         <a href="/">privacy policy</a></label
                       >
