@@ -1,0 +1,10 @@
+.leads-modal-backdrop {
+  --phoenix-backdrop-zindex: 1050;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: var(--phoenix-backdrop-zindex);
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+}

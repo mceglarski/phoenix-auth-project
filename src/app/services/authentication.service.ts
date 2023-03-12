@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map, Observable, tap } from 'rxjs';
+import { BehaviorSubject, map, Observable, shareReplay, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { CredentialsRequest } from '../models/credentials/credentials.request';
@@ -31,7 +31,8 @@ export class AuthenticationService {
         tap((data) => {
           this._loggedInSubject.next(true);
           this.saveUserStorage(data);
-        })
+        }),
+        shareReplay(1)
       );
   }
 

@@ -31,18 +31,20 @@ export class UserService {
   }
 
   public getMeInformation(): Observable<UserResponse> {
-    return this._httpClient.get<UserResponse>(`${environment.apiUrl}/auth/me`);
+    return this._httpClient
+      .get<UserResponse>(`${environment.apiUrl}/auth/me`)
+      .pipe(shareReplay(1));
   }
 
-  public getProfileCompleted(): Observable<boolean> {
-    if (
-      this._storage.getItem('firstName') &&
-      this._storage.getItem('lastName')
-    ) {
-      return of(true);
-    }
-    return of(false);
-  }
+  // public getProfileCompleted(): Observable<boolean> {
+  //   if (
+  //     this._storage.getItem('firstName') &&
+  //     this._storage.getItem('lastName')
+  //   ) {
+  //     return of(true);
+  //   }
+  //   return of(false);
+  // }
 
   public getUserRole(): Observable<string> {
     if (this._storage.getItem('accessToken')) {

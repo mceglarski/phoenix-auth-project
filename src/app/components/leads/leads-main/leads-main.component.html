@@ -2,95 +2,131 @@
   <app-header></app-header>
   <div class="content">
     <div *ngIf="leadsList$ | async as leads" class="pb-9">
-      <h2 class="mb-4">{{leads.length}} {{leads.length == 1 ? 'Company' : 'Companies'}}</h2>
-      <div id="dealsTable"
-           data-list='{"valueNames":["name","email","phone","contact","company","date"],"page":10,"pagination":true}'>
+      <h2 class="mb-4">
+        {{ leads.length }} {{ leads.length == 1 ? "Company" : "Companies" }}
+      </h2>
+      <div
+        id="dealsTable"
+        data-list='{"valueNames":["name","email","phone","contact","company","date"],"page":10,"pagination":true}'
+      >
         <div class="row g-3 justify-content-between mb-4">
           <div class="col-auto">
             <div class="d-md-flex justify-content-between">
               <div>
-                <button class="btn btn-primary me-4"><span class="fas fa-plus me-2"></span>Create Lead</button>
+                <button class="btn btn-primary me-4">
+                  <span class="fas fa-plus me-2"></span>Create Lead
+                </button>
               </div>
             </div>
           </div>
           <div class="col-auto">
             <div class="d-flex">
-              <button class="btn px-3 btn-phoenix-secondary" type="button" data-bs-toggle="modal"
-                      data-bs-target="#filterModal" data-boundary="window" aria-haspopup="true" aria-expanded="false"
-                      data-bs-reference="parent"><span class="fa fa-filter text-primary"
-                                                       data-fa-transform="down-3"></span></button>
-              <div class="modal fade" id="filterModal" tabindex="-1">
+              <button
+                class="btn px-3 btn-phoenix-secondary"
+                type="button"
+                data-bs-toggle="modal"
+                data-bs-target="#filterModal"
+                data-boundary="window"
+                aria-haspopup="true"
+                aria-expanded="false"
+                data-bs-reference="parent"
+                (click)="openFilterModal()"
+              >
+                <span
+                  class="fa fa-filter text-primary"
+                  data-fa-transform="down-3"
+                ></span>
+              </button>
+              <div
+                *ngIf="filterModal$ | async as filterModal"
+                [style.display]="filterModal ? 'block' : 'none'"
+                [style.opacity]="filterModal ? '1' : '0'"
+                [class.leads-modal-backdrop]="filterModal"
+                class="modal fade"
+                id="filterModal"
+                tabindex="-1"
+              >
                 <div class="modal-dialog modal-dialog-centered">
                   <div class="modal-content border">
-                    <form id="addEventForm" autocomplete="off">
-                      <div class="modal-header border-200 p-4">
-                        <h5 class="modal-title text-1000 fs-2 lh-sm">Filter</h5>
-                        <button class="btn p-1 text-900" type="button" data-bs-dismiss="modal"
-                                aria-label="Close"><span class="fas fa-times fs--1"> </span></button>
+                    <div class="modal-header border-200 p-4">
+                      <h5 class="modal-title text-1000 fs-2 lh-sm">Filter</h5>
+                      <button
+                        class="btn p-1 text-900"
+                        type="button"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                        (click)="closeFilterModal()"
+                      >
+                        <span class="fas fa-times fs--1"> </span>
+                      </button>
+                    </div>
+                    <div class="modal-body pt-4 pb-2 px-4">
+                      <div class="mb-3">
+                        <label class="fw-bold mb-2 text-1000"
+                          >Sales Stage</label
+                        >
+                        <select class="form-select" id="leadStatus">
+                          <option value="coldLead">Investigation</option>
+                        </select>
                       </div>
-                      <div class="modal-body pt-4 pb-2 px-4">
-                        <div class="mb-3">
-                          <label class="fw-bold mb-2 text-1000" for="leadStatus">Sales Stage</label>
-                          <select class="form-select" id="leadStatus">
-                            <option value="newLead" selected="selected">Preliminaries</option>
-                            <option value="coldLead">Investigation</option>
-                            <option value="canceled">Demonstrating Capabilities</option>
-                            <option value="wonLead">Obtaining Commitment</option>
-                            <option value="wonLead">No Match</option>
-                          </select>
-                        </div>
-                        <div class="mb-3">
-                          <label class="fw-bold mb-2 text-1000" for="createDate">Scope</label>
-                          <div class="form-check">
-                            <input class="form-check-input" id="flexCheckDefault" type="checkbox" value="" />
-                            <label class="form-check-label" for="flexCheckDefault">Internal Project</label>
-                          </div>
-                          <div class="form-check">
-                            <input class="form-check-input" id="flexCheckChecked" type="checkbox" value=""
-                                   checked="" />
-                            <label class="form-check-label" for="flexCheckChecked">External Project</label>
-                          </div>
-                          <div class="form-check">
-                            <input class="form-check-input" id="flexCheckChecked" type="checkbox" value=""
-                                   checked="" />
-                            <label class="form-check-label" for="flexCheckChecked">Recruitment Agency</label>
-                          </div>
-                        </div>
-                        <div class="mb-3">
-                          <label class="fw-bold mb-2 text-1000" for="createDate">Size</label>
-                          <div class="form-check">
-                            <input class="form-check-input" id="flexCheckDefault" type="checkbox" value="" />
-                            <label class="form-check-label" for="flexCheckDefault">0-50</label>
-                          </div>
-                          <div class="form-check">
-                            <input class="form-check-input" id="flexCheckChecked" type="checkbox" value=""
-                                   checked="" />
-                            <label class="form-check-label" for="flexCheckChecked">51-100</label>
-                          </div>
-                          <div class="form-check">
-                            <input class="form-check-input" id="flexCheckChecked" type="checkbox" value=""
-                                   checked="" />
-                            <label class="form-check-label" for="flexCheckChecked">101-500</label>
-                          </div>
-                          <div class="form-check">
-                            <input class="form-check-input" id="flexCheckChecked" type="checkbox" value=""
-                                   checked="" />
-                            <label class="form-check-label" for="flexCheckChecked">501-1000</label>
-                          </div>
-                          <div class="form-check">
-                            <input class="form-check-input" id="flexCheckChecked" type="checkbox" value=""
-                                   checked="" />
-                            <label class="form-check-label" for="flexCheckChecked">1001+</label>
-                          </div>
+                      <div class="mb-3" [formGroup]="activityScopeFormGroup">
+                        <label class="fw-bold mb-2 text-1000">Scope</label>
+                        <div
+                          *ngFor="let activities of leadsActivities$ | async"
+                          class="form-check"
+                        >
+                          <input
+                            class="form-check-input"
+                            type="checkbox"
+                            [id]="activities.id"
+                            [value]="activities.name"
+                            [formControlName]="activities.id"
+                          />
+                          <label class="form-check-label">{{
+                            activities.name
+                          }}</label>
                         </div>
                       </div>
-                      <div
-                        class="modal-footer d-flex justify-content-end align-items-center px-4 pb-4 border-0 pt-3">
-                        <button class="btn btn-sm btn-phoenix-primary px-4 fs--2 my-0" type="submit"> <span
-                          class="fas fa-arrows-rotate me-2 fs--2"></span>Reset</button>
-                        <button class="btn btn-sm btn-primary px-9 fs--2 my-0" type="submit">Done</button>
+                      <div class="mb-3" [formGroup]="sizeFilterFormGroup">
+                        <label class="fw-bold mb-2 text-1000">Size</label>
+                        <div
+                          *ngFor="
+                            let size of sizeFilterLimit;
+                            let index = index
+                          "
+                          class="form-check"
+                        >
+                          <input
+                            class="form-check-input"
+                            type="checkbox"
+                            [id]="index"
+                            [value]="size"
+                            [formControlName]="index"
+                          />
+                          <label class="form-check-label"
+                            >{{ size.min
+                            }}{{ size.max ? "-" + size.max : "+" }}</label
+                          >
+                        </div>
                       </div>
-                    </form>
+                    </div>
+                    <div
+                      class="modal-footer d-flex justify-content-end align-items-center px-4 pb-4 border-0 pt-3"
+                    >
+                      <button
+                        class="btn btn-sm btn-phoenix-primary px-4 fs--2 my-0"
+                        (click)="resetFilters(); closeFilterModal()"
+                      >
+                        <span class="fas fa-arrows-rotate me-2 fs--2"></span
+                        >Reset
+                      </button>
+                      <button
+                        class="btn btn-sm btn-primary px-9 fs--2 my-0"
+                        (click)="closeFilterModal()"
+                      >
+                        Done
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -99,72 +135,153 @@
         </div>
         <div class="px-4 mx-lg-n6 px-lg-6">
           <div class="table-responsive scrollbar mx-n1 px-1 border-top">
-
             <table class="table fs--1 mb-0 leads-table">
               <thead>
-              <tr>
-                <th class="sort white-space-nowrap align-middle text-uppercase" scope="col">
-                  Name</th>
-                <th class="sort align-middle ps-4 pe-5 text-uppercase border-end" scope="col" style="width: 5%;">
-                  Scope
-                </th>
-                <th class="sort align-middle ps-4 pe-5 text-uppercase  border-end" scope="col" style="width: 5%;">
-                  Hiring
-                </th>
-                <th class="sort align-middle ps-4 pe-5 text-uppercase border-end" scope="col">
-                  Industry
-                </th>
-                <th class="sort align-middle ps-4 pe-5 text-uppercase  border-end" scope="col">Location
-                </th>
-                <th class="sort align-middle ps-4 pe-5 text-uppercase  border-end" scope="col">Size
-                </th>
-                <th class="sort align-middle ps-4 pe-5 text-uppercase  border-end" scope="col">Revenue
-                </th>
-                <th class="sort align-middle ps-4 pe-5 text-uppercase  border-end" scope="col">Sales stage
-                </th>
-              </tr>
+                <tr>
+                  <th
+                    class="sort white-space-nowrap align-middle text-uppercase"
+                    scope="col"
+                  >
+                    Name
+                  </th>
+                  <th
+                    class="sort align-middle ps-4 pe-5 text-uppercase border-end"
+                    scope="col"
+                    style="width: 5%"
+                  >
+                    Scope
+                  </th>
+                  <th
+                    class="sort align-middle ps-4 pe-5 text-uppercase border-end"
+                    scope="col"
+                    style="width: 5%"
+                  >
+                    Hiring
+                  </th>
+                  <th
+                    class="sort align-middle ps-4 pe-5 text-uppercase border-end"
+                    scope="col"
+                  >
+                    Industry
+                  </th>
+                  <th
+                    class="sort align-middle ps-4 pe-5 text-uppercase border-end"
+                    scope="col"
+                  >
+                    Location
+                  </th>
+                  <th
+                    class="sort align-middle ps-4 pe-5 text-uppercase border-end"
+                    scope="col"
+                  >
+                    Size
+                  </th>
+                  <th
+                    class="sort align-middle ps-4 pe-5 text-uppercase border-end"
+                    scope="col"
+                  >
+                    Revenue
+                  </th>
+                  <th
+                    class="sort align-middle ps-4 pe-5 text-uppercase border-end"
+                    scope="col"
+                  >
+                    Sales stage
+                  </th>
+                </tr>
               </thead>
 
               <tbody class="list" id="deal-tables-body">
-              <tr *ngFor="let lead of leads" class="hover-actions-trigger btn-reveal-trigger position-static">
-                <td class="name align-middle white-space-nowrap">
-                  <div class="d-flex align-items-lg-center">
-                    <div><a class="fs-0 fw-bold" href="#">{{lead.name}}</a>
-                      <div class="d-flex align-items-center justify-content-around">
-                        <a [href]="lead.linkedinLink"><i class="fa fa-linkedin"></i></a>
-                        <a [href]="lead.websiteLink"><i class="fa fa-link"></i></a>
+                <tr
+                  *ngFor="let lead of leads"
+                  class="hover-actions-trigger btn-reveal-trigger position-static"
+                >
+                  <td class="name align-middle white-space-nowrap">
+                    <div class="d-flex align-items-lg-center">
+                      <div>
+                        <a class="fs-0 fw-bold" href="#">{{ lead.name }}</a>
+                        <div
+                          class="d-flex align-items-center justify-content-around"
+                        >
+                          <a [href]="lead.linkedinLink"
+                            ><i class="fa fa-linkedin"></i
+                          ></a>
+                          <a [href]="lead.websiteLink"
+                            ><i class="fa fa-link"></i
+                          ></a>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </td>
-                <td class="align-middle white-space-nowrap fw-semi-bold text-1000 ps-4 border-end">
-                  <div><span class="badge badge-phoenix badge-phoenix-warning">Internal Projects</span></div>
-                  <div><span class="badge badge-phoenix badge-phoenix-warning">External Projects</span></div>
-                  <div><span class="badge badge-phoenix badge-phoenix-warning">Recruitment Agency </span></div>
-                </td>
-                <td class="align-middle white-space-nowrap fw-semi-bold text-1000 ps-4 border-end">
-                  <div>Is hiring: <i class="fa" [class.fa-check]="lead.hiring.active" [class.fa-times]="!lead.hiring.active"></i></div>
-                  <div>Juniors: <i class="fa" [class.fa-check]="lead.hiring.junior" [class.fa-times]="!lead.hiring.junior"></i></div>
-                  <div>Talent Program : <i class="fa" [class.fa-check]="lead.hiring.talentProgram" [class.fa-times]="!lead.hiring.talentProgram"></i></div>
-                </td>
-                <td
-                  class="company align-middle white-space-nowrap text-600 ps-4 border-end fw-semi-bold text-1000">
-                  {{lead.industry}}</td>
-                <td class="date align-middle white-space-nowrap text-600 ps-4 text-700 border-end">{{lead.location}}</td>
-                <td class="date align-middle white-space-nowrap text-600 ps-4 text-700 border-end">
-                  <div>Total: {{lead.companySize.total}}</div>
-                  <div>Dev: {{lead.companySize.dev}}</div>
-                  <div>FE: {{lead.companySize.fe}}</div>
-                </td>
-                <td class="date align-middle white-space-nowrap text-600 ps-4 text-700 border-end">
-                  <div>Total: {{lead.annualRevenue}}</div>
-                </td>
-                <td class="date align-middle white-space-nowrap text-600 ps-4 text-700 border-end"><span
-                  class="badge badge-phoenix badge-phoenix-primary">Investigation</span></td>
-              </tr>
+                  </td>
+                  <td
+                    class="align-middle white-space-nowrap fw-semi-bold text-1000 ps-4 border-end"
+                  >
+                    <div *ngFor="let activity of lead.activities">
+                      <span class="badge badge-phoenix badge-phoenix-warning">{{
+                        activity.name
+                      }}</span>
+                    </div>
+                  </td>
+                  <td
+                    class="align-middle white-space-nowrap fw-semi-bold text-1000 ps-4 border-end"
+                  >
+                    <div>
+                      Is hiring:
+                      <i
+                        class="fa"
+                        [class.fa-check]="lead.hiring.active"
+                        [class.fa-times]="!lead.hiring.active"
+                      ></i>
+                    </div>
+                    <div>
+                      Juniors:
+                      <i
+                        class="fa"
+                        [class.fa-check]="lead.hiring.junior"
+                        [class.fa-times]="!lead.hiring.junior"
+                      ></i>
+                    </div>
+                    <div>
+                      Talent Program :
+                      <i
+                        class="fa"
+                        [class.fa-check]="lead.hiring.talentProgram"
+                        [class.fa-times]="!lead.hiring.talentProgram"
+                      ></i>
+                    </div>
+                  </td>
+                  <td
+                    class="company align-middle white-space-nowrap text-600 ps-4 border-end fw-semi-bold text-1000"
+                  >
+                    {{ lead.industry }}
+                  </td>
+                  <td
+                    class="date align-middle white-space-nowrap text-600 ps-4 text-700 border-end"
+                  >
+                    {{ lead.location }}
+                  </td>
+                  <td
+                    class="date align-middle white-space-nowrap text-600 ps-4 text-700 border-end"
+                  >
+                    <div>Total: {{ lead.companySize.total }}</div>
+                    <div>Dev: {{ lead.companySize.dev }}</div>
+                    <div>FE: {{ lead.companySize.fe }}</div>
+                  </td>
+                  <td
+                    class="date align-middle white-space-nowrap text-600 ps-4 text-700 border-end"
+                  >
+                    <div>Total: {{ lead.annualRevenue }}</div>
+                  </td>
+                  <td
+                    class="date align-middle white-space-nowrap text-600 ps-4 text-700 border-end"
+                  >
+                    <span class="badge badge-phoenix badge-phoenix-primary"
+                      >Investigation</span
+                    >
+                  </td>
+                </tr>
               </tbody>
             </table>
-
           </div>
         </div>
       </div>
@@ -172,4 +289,3 @@
     <app-footer></app-footer>
   </div>
 </div>
-

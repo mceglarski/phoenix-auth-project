@@ -1,11 +1,11 @@
 import { LeadsHiringModel } from './leads-hiring.model';
 import { LeadsCompanySizeModel } from './leads-company-size.model';
-import {LeadsActivitiesQueryModel} from "./leads-activities.query-model";
+import { LeadsActivitiesResponse } from './leads-activities.response';
 
 export interface LeadsQueryModel {
   readonly name: string;
   readonly hiring: LeadsHiringModel;
-  // readonly activities: LeadsActivitiesQueryModel[];
+  readonly activities: LeadsActivitiesResponse[];
   readonly linkedinLink: string;
   readonly industry: string;
   readonly annualRevenue: number;

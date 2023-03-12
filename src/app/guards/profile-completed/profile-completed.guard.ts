@@ -25,7 +25,7 @@ export class ProfileCompletedGuard implements CanActivate {
         return of(true);
       }),
       catchError((e) => {
-        if (e.status === 404) {
+        if (e.status === 404 || e.status === 403) {
           return of(this._router.parseUrl(ROUTES_DEF.COMPLETE_PROFILE));
         }
         return of(this._router.parseUrl(ROUTES_DEF.MAIN_PAGE));

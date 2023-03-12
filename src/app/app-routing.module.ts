@@ -15,6 +15,8 @@ import { CompleteProfileComponentModule } from './components/user/complete-profi
 import { ProfileCompletedGuard } from './guards/profile-completed/profile-completed.guard';
 import { LoggedOutComponent } from './components/user/logged-out/logged-out.component';
 import { LoggedOutComponentModule } from './components/user/logged-out/logged-out.component-module';
+import { AlreadyLoggedGuard } from './guards/already-logged/already-logged.guard';
+import { AuthGuard } from './guards/auth/auth.guard';
 
 @NgModule({
   imports: [
@@ -27,6 +29,7 @@ import { LoggedOutComponentModule } from './components/user/logged-out/logged-ou
       {
         path: ROUTES_DEF.VERIFY,
         component: VerifyComponent,
+        canActivate: [AuthGuard],
       },
       {
         path: ROUTES_DEF.LOGGED_OUT,
@@ -35,15 +38,16 @@ import { LoggedOutComponentModule } from './components/user/logged-out/logged-ou
       {
         path: ROUTES_DEF.COMPLETE_PROFILE,
         component: CompleteProfileComponent,
-        canActivate: [EmailVerifiedGuard],
+        canActivate: [AuthGuard, EmailVerifiedGuard],
       },
       {
         path: ROUTES_DEF.LEADS,
         component: LeadsMainComponent,
-        canActivate: [EmailVerifiedGuard, ProfileCompletedGuard],
+        canActivate: [AuthGuard, EmailVerifiedGuard, ProfileCompletedGuard],
       },
       {
         path: ROUTES_DEF.AUTH,
+        canActivate: [AlreadyLoggedGuard],
         children: [
           {
             path: '',

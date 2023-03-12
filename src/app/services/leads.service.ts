@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
+import { map, Observable, shareReplay } from 'rxjs';
 import { ResponseModel } from '../models/response.response';
 import { LeadsResponse } from '../models/leads/leads.response';
 import { environment } from '../../environments/environment';
@@ -23,6 +23,9 @@ export class LeadsService {
       .get<ResponseModel<LeadsActivitiesResponse[]>>(
         `${environment.apiUrl}/leads/activities`
       )
-      .pipe(map((data) => data.data));
+      .pipe(
+        map((data) => data.data),
+        shareReplay(1)
+      );
   }
 }
