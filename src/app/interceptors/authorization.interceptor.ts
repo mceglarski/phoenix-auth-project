@@ -24,6 +24,7 @@ export class AuthorizationInterceptor implements HttpInterceptor {
       'auth/complete-profile',
       'auth/my-bio',
       'auth/add-bio',
+      'auth/refresh',
       'leads'
     ];
     const token = this._storage.getItem('accessToken');

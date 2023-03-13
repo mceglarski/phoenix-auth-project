@@ -17,9 +17,9 @@ import {FormControl, FormGroup} from "@angular/forms";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent {
-  private _collapseNavigation: BehaviorSubject<boolean> =
+  private readonly _collapseNavigation: BehaviorSubject<boolean> =
     new BehaviorSubject<boolean>(false);
-  public collapseNavigation$: Observable<boolean> =
+  public readonly collapseNavigation$: Observable<boolean> =
     this._collapseNavigation.asObservable();
 
   constructor(

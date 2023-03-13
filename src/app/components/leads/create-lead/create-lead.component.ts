@@ -43,9 +43,9 @@ export class CreateLeadComponent {
     talentProgram: new FormControl(false),
     notes: new FormControl(''),
   });
-  public activityScopeFormGroup: FormGroup = new FormGroup({});
+  public readonly activityScopeFormGroup: FormGroup = new FormGroup({});
 
-  public leadsActivities$: Observable<LeadsActivitiesResponse[]> =
+  public readonly leadsActivities$: Observable<LeadsActivitiesResponse[]> =
     this._leadsService.getLeadsActivities().pipe(
       tap((activities) => {
         activities.forEach((activity) =>

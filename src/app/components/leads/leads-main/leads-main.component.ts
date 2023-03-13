@@ -24,8 +24,8 @@ import {
 } from '../../../models/leads/query-models/filter-size.query-model';
 import { UserService } from '../../../services/user.service';
 import { USER_ROLES } from '../../../congifuration/user-roles';
-import {Router} from "@angular/router";
-import {ROUTES_DEF} from "../../../congifuration/routes-definition";
+import { Router } from '@angular/router';
+import { ROUTES_DEF } from '../../../congifuration/routes-definition';
 
 @Component({
   selector: 'app-leads-main',
@@ -35,18 +35,19 @@ import {ROUTES_DEF} from "../../../congifuration/routes-definition";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LeadsMainComponent implements OnInit {
-  public activityScopeFormGroup: FormGroup = new FormGroup({});
-  public sizeFilterFormGroup: FormGroup = new FormGroup({});
+  public readonly activityScopeFormGroup: FormGroup = new FormGroup({});
+  public readonly sizeFilterFormGroup: FormGroup = new FormGroup({});
 
   public readonly userRoles = USER_ROLES;
-  public userRole$: Observable<string> = this._userService.getUserRole();
+  public readonly userRole$: Observable<string> =
+    this._userService.getUserRole();
 
-  private _filterModalSubject: BehaviorSubject<boolean> =
+  private readonly _filterModalSubject: BehaviorSubject<boolean> =
     new BehaviorSubject<boolean>(false);
-  public filterModal$: Observable<boolean> =
+  public readonly filterModal$: Observable<boolean> =
     this._filterModalSubject.asObservable();
 
-  public leadsActivities$: Observable<LeadsActivitiesResponse[]> =
+  public readonly leadsActivities$: Observable<LeadsActivitiesResponse[]> =
     this._leadsService.getLeadsActivities().pipe(
       tap((activities) => {
         activities.forEach((activity) =>
@@ -153,7 +154,7 @@ export class LeadsMainComponent implements OnInit {
   }
 
   public navigateToCreateLead(): void {
-    this._router.navigateByUrl(ROUTES_DEF.CREATE_LEAD)
+    this._router.navigateByUrl(ROUTES_DEF.CREATE_LEAD);
   }
 
   private _setSizeFilterFormGroup(): void {
